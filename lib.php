@@ -40,10 +40,10 @@ class repository_resourcespace extends repository {
     public function get_listing($path = '', $page = '') {
         if ($path !== '') {
             // Redirect to search, asking for filesa within the given collection
-	   echo "<script>console.log('REDIRECT');</script>";
+	    echo "<script>console.log('REDIRECT');</script>";
             return $this->search(sprintf('!collection%s', $path), $page);
         }
-
+        echo "<script>console.log(' NO REDIRECT' + '".$path."');</script>";
         $listArray = array(
             'list' => $this->do_search_collections(),
             'norefresh' => true,
