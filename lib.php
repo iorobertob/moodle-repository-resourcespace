@@ -66,7 +66,6 @@ class repository_resourcespace extends repository {
     }
 */
     public function search($searchText, $page = 0) {
-        echo "<script>console.log('REDIRECT');</script>";
         $listArray = array(
             'list' => array(),
             'norefresh' => true,
