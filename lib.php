@@ -28,11 +28,8 @@ class repository_resourcespace extends repository {
         parent::__construct($repositoryid, $context, $options, $readonly);
         $this->config = get_config('resourcespace');
         $this->resourcespace_api_url = get_config('resourcespace', 'resourcespace_api_url');
-	echo "<script>console.log('API URL: " . $this->resourcespace_api_url . "' );</script>";
         $this->api_key = get_config('resourcespace', 'api_key');
-	echo "<script>console.log('API KEY: " . $this->api_key . "' );</script>";
         $this->api_user = get_config('resourcespace', 'api_user');
-	echo "<script>console.log('API USER: " . $this->api_user . "' );</script>";
         $this->enable_help = get_config('resourcespace', 'enable_help');
         $this->enable_help_url = get_config('resourcespace', 'enable_help_url');
     }
@@ -40,10 +37,9 @@ class repository_resourcespace extends repository {
     public function get_listing($path = '', $page = '') {
         if ($path !== '') {
             // Redirect to search, asking for filesa within the given collection
-	        echo "<script>console.log('REDIRECT');</script>";
             return $this->search(sprintf('!collection%s', $path), $page);
         }
-        echo "<script>console.log(' NO REDIRECT' + '".$path."');</script>";
+        
         $listArray = array(
             'list' => $this->do_search_collections(),
             'norefresh' => true,
@@ -114,7 +110,8 @@ class repository_resourcespace extends repository {
     }
 
     public function supported_returntypes() {
-        return FILE_INTERNAL;
+        // return FILE_INTERNAL;
+        return FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
@@ -207,12 +204,10 @@ class repository_resourcespace extends repository {
         $queryData['function'] = $method;
 
         $query = http_build_query($queryData, '', '&');
-	echo "<script>console.log('QUERY: " . $query . "' );</script>";
         // Sign the request with the private key.
         $sign = hash("sha256", $this->api_key . $query);
 
         $requestUrl = "$this->resourcespace_api_url" . $query . "&sign=" . $sign;
-	echo "<script>console.log('REQUEST URL: " . $requestUrl . "' );</script>";
         $response = file_get_contents($requestUrl);
 
         return json_decode($response);
