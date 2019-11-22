@@ -110,8 +110,8 @@ class repository_resourcespace extends repository {
     }
 
     public function supported_returntypes() {
-        // return FILE_INTERNAL;
-        return FILE_REFERENCE;
+        return FILE_INTERNAL;
+        // return FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
