@@ -104,16 +104,38 @@ class repository_resourcespace extends repository {
     /**
      * Prepare file reference information.
      *
-     * We are using this method to clean up the source to make sure that it
-     * is a valid source.
-     *
-     * @param string $source of the file.
-     * @return string file reference.
+     * @inheritDocs
      */
     public function get_file_reference($source) {
-        // We could do some magic upgrade code here.
-        return $source;
+        global $USER;
+        $reference = new stdClass;
+        $reference->userid = $USER->id;
+        $reference->username = fullname($USER);
+        $reference->path = $source;
+
+        // Determine whether we are downloading the file, or should use a file reference.
+        $usefilereference = optional_param('usefilereference', false, PARAM_BOOL);
+        if ($usefilereference) {
+            if ($data = $this->dropbox->get_file_share_info($source)) {
+                $reference = (object) array_merge((array) $data, (array) $reference);
+            }
+        }
+
+        return serialize($reference);
     }
+
+    /**
+     * Return file URL for external link.
+     *
+     * @inheritDocs
+     */
+    public function get_link($reference) {
+        $unpacked = $this->unpack_reference($reference);
+
+        return $this->get_file_download_link($unpacked->url);
+    }
+
+    
 
     public function supported_filetypes() {
         return '*';
