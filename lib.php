@@ -111,8 +111,8 @@ class repository_resourcespace extends repository {
 
     public function supported_returntypes() {
         // return FILE_INTERNAL;
-        // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
-        return FILE_EXTERNAL;
+        return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
+        // return FILE_EXTERNAL;
         // return FILE_REFERENCE;
     }
 
