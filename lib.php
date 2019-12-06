@@ -101,6 +101,20 @@ class repository_resourcespace extends repository {
         return $result;
     }
 
+    /**
+     * Prepare file reference information.
+     *
+     * We are using this method to clean up the source to make sure that it
+     * is a valid source.
+     *
+     * @param string $source of the file.
+     * @return string file reference.
+     */
+    public function get_file_reference($source) {
+        // We could do some magic upgrade code here.
+        return $source;
+    }
+
     public function supported_filetypes() {
         return '*';
     }
