@@ -137,8 +137,9 @@ class repository_resourcespace extends repository {
                 $reference->url = $resourceUrl;
             }
         }
-
-        return serialize($reference);
+        $serial_reference = serialize($reference);
+        rs_print("SERIAL REFERENCE: " .$serial_reference )
+        return $serial_reference;
     }
 
     /**
@@ -151,6 +152,18 @@ class repository_resourcespace extends repository {
         $unpacked = unserialize($reference);
 
         return $this->get_file_download_link($unpacked->url);
+    }
+
+    public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
+    // Example taken from repository_equella
+        // $reference  = unserialize(base64_decode($stored_file->get_reference()));
+        $reference = unserialize($stored_file->get_reference());
+        $url = $this->appendtoken($reference->url);
+        if ($url) {
+            header('Location: ' . $url);
+        } else {
+            send_file_not_found();
+        }
     }
 
     /**
