@@ -28,12 +28,12 @@ class repository_resourcespace extends repository {
 
     public function __construct($repositoryid, $context, array $options, $readonly) {
         parent::__construct($repositoryid, $context, $options, $readonly);
-        $this->config = get_config('resourcespace');
+        $this->config           = get_config('resourcespace');
         $this->resourcespace_api_url = get_config('resourcespace', 'resourcespace_api_url');
-        $this->api_key = get_config('resourcespace', 'api_key');
-        $this->api_user = get_config('resourcespace', 'api_user');
-        $this->enable_help = get_config('resourcespace', 'enable_help');
-        $this->enable_help_url = get_config('resourcespace', 'enable_help_url');
+        $this->api_key          = get_config('resourcespace', 'api_key');
+        $this->api_user         = get_config('resourcespace', 'api_user');
+        $this->enable_help      = get_config('resourcespace', 'enable_help');
+        $this->enable_help_url  = get_config('resourcespace', 'enable_help_url');
     }
 
     public function get_listing($path = '', $page = '') {
