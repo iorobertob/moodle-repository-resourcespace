@@ -138,7 +138,7 @@ class repository_resourcespace extends repository {
             }
         }
         $serial_reference = serialize($reference);
-        rs_print("SERIAL REFERENCE: " .$serial_reference )
+        rs_print("SERIAL REFERENCE: " .$serial_reference );
         return $serial_reference;
     }
 
