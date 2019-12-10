@@ -94,7 +94,9 @@ class repository_resourcespace extends repository {
         // to get the actual filesource.
         rs_print("URL AND FILENAME: ". $url . " + ". $filename);
 
-        $fileInfo = explode(',', $url);
+
+        // $fileInfo = explode(',', $url);
+        $fileInfo = explode(',', unserialize($url)->path);
 
         $resourceUrl = $this->make_api_request('get_resource_path', array(
             'param1' => $fileInfo[0], // $resource
