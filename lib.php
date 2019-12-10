@@ -41,7 +41,7 @@ class repository_resourcespace extends repository {
             // Redirect to search, asking for filesa within the given collection
             return $this->search(sprintf('!collection%s', $path), $page);
         }
-        
+        rs_print("LISTING: " .$page);
         $listArray = array(
             'list' => $this->do_search_collections(),
             'norefresh' => true,
@@ -49,7 +49,7 @@ class repository_resourcespace extends repository {
             'dynload' => true,
             'issearchresult' => false,
         );
-
+        rs_print("LISTING: " .serialize($listArray));
         if ($this->enable_help == 1) {
             $listArray['help'] = "$this->enable_help_url";
         }
@@ -109,7 +109,7 @@ class repository_resourcespace extends repository {
      * @inheritDocs
      */
     public function get_file_reference($source) {
-        rs_print($source);
+        rs_print("SOURCE: " .$source);
         global $USER;
         $reference = new stdClass;
         $reference->userid = $USER->id;
