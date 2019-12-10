@@ -139,6 +139,7 @@ class repository_resourcespace extends repository {
             if ($resourceUrl) {
                 // $reference = (object) array_merge((array) $data, (array) $reference);
                 $reference->url = $resourceUrl;
+                $reference->filename= $source;
             }
         }
         $serial_reference = serialize($reference);
@@ -224,7 +225,7 @@ class repository_resourcespace extends repository {
             // $ref = unserialize(base64_decode($reference));
             $ref = unserialize($reference);
             //TODO: CHANGE THIS !!!!!!!!!!
-            $ref->filename = 'dummy';
+            // $ref->filename = 'dummy';
             return $this->get_name(). ': '. $ref->filename;
         } else {
             return get_string('lostsource', 'repository', '');
