@@ -22,6 +22,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+require_once("$CFG->dirroot/repository/resourcespace/io_print.php"); 
+
 class repository_resourcespace extends repository {
 
     public function __construct($repositoryid, $context, array $options, $readonly) {
@@ -107,6 +109,7 @@ class repository_resourcespace extends repository {
      * @inheritDocs
      */
     public function get_file_reference($source) {
+        rs_print($source);
         global $USER;
         $reference = new stdClass;
         $reference->userid = $USER->id;
