@@ -159,7 +159,7 @@ class repository_resourcespace extends repository {
     // Example taken from repository_equella
         // $reference  = unserialize(base64_decode($stored_file->get_reference()));
         $reference = unserialize($stored_file->get_reference());
-        $url = $this->appendtoken($reference->url);
+        // $url = $this->appendtoken($reference->url);
         if ($url) {
             rs_print("URL: ".$url);
             header('Location: ' . $url);
