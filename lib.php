@@ -39,7 +39,9 @@ class repository_resourcespace extends repository {
     public function get_listing($path = '', $page = '') {
         if ($path !== '') {
             // Redirect to search, asking for filesa within the given collection
-            return $this->search(sprintf('!collection%s', $path), $page);
+            $listArray = $this->search(sprintf('!collection%s', $path), $page);
+            rs_print("LISTING PATH: " .serialize($listArray));
+            return $listArray;
         }
         rs_print("LISTING: " .$page);
         $listArray = array(
@@ -59,19 +61,19 @@ class repository_resourcespace extends repository {
 
 
 
-        $list = array(
- //this will be used to build navigation bar
-'path'=>array(array('name'=>'root','path'=>'/'), array('name'=>'subfolder', 'path'=>'/subfolder')),
-'manage'=>'http://webmgr.moodle.com',
-'list'=> array(
-    array('title'=>'filename1', 'date'=>'1340002147', 'size'=>'10451213', 'source'=>'http://www.moodle.com/dl.rar'),
-    array('title'=>'folder', 'date'=>'1340002147', 'size'=>'0', 'children'=>array())
-)
-);
+//         $list = array(
+//  //this will be used to build navigation bar
+// 'path'=>array(array('name'=>'root','path'=>'/'), array('name'=>'subfolder', 'path'=>'/subfolder')),
+// 'manage'=>'http://webmgr.moodle.com',
+// 'list'=> array(
+//     array('title'=>'filename1', 'date'=>'1340002147', 'size'=>'10451213', 'source'=>'http://www.moodle.com/dl.rar'),
+//     array('title'=>'folder', 'date'=>'1340002147', 'size'=>'0', 'children'=>array())
+// )
+// );
 
-        return $list;
+//         return $list;
 
-        // return $listArray;
+        return $listArray;
     }
 
 /*
