@@ -155,6 +155,7 @@ class repository_resourcespace extends repository {
     }
 
     public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
+        rs_print("SEND FILE");
     // Example taken from repository_equella
         // $reference  = unserialize(base64_decode($stored_file->get_reference()));
         $reference = unserialize($stored_file->get_reference());
