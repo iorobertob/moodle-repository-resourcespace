@@ -40,7 +40,7 @@ class repository_resourcespace extends repository {
         if ($path !== '') {
             // Redirect to search, asking for filesa within the given collection
             $listArray = $this->search(sprintf('!collection%s', $path), $page);
-            rs_print("PAGE: " . $page, true);
+            rs_print("PAGE: " . $page, false);
             rs_print("LISTING PATH ".$path.": " .serialize($listArray), false);
             return $listArray;
         }
