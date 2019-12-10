@@ -154,6 +154,20 @@ class repository_resourcespace extends repository {
         return $this->get_file_download_link($unpacked->url);
     }
 
+    /**
+     * Converts a URL received from dropbox API function 'shares' into URL that
+     * can be used to download/access file directly
+     *
+     * @param string $sharedurl
+     * @return string
+     */
+    protected function get_file_download_link($sharedurl) {
+        $url = new \moodle_url($sharedurl);
+        $url->param('dl', 1);
+
+        return $url->out(false);
+    }
+
     public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
         rs_print("SEND FILE");
     // Example taken from repository_equella
@@ -197,6 +211,19 @@ class repository_resourcespace extends repository {
     public function sync_individual_file(stored_file $storedfile) {
         
         return true;
+    }
+
+    public function get_reference_details($reference, $filestatus = 0) {
+    // Example taken from repository_equella
+        if (!$filestatus) {
+            // $ref = unserialize(base64_decode($reference));
+            $ref = unserialize($reference);
+            //TODO: CHANGE THIS !!!!!!!!!!
+            $ref->filename = 'dummy';
+            return $this->get_name(). ': '. $ref->filename;
+        } else {
+            return get_string('lostsource', 'repository', '');
+        }
     }
 
     public function supported_filetypes() {
