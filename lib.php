@@ -160,6 +160,7 @@ class repository_resourcespace extends repository {
         // $reference  = unserialize(base64_decode($stored_file->get_reference()));
         $reference = unserialize($stored_file->get_reference());
         // $url = $this->appendtoken($reference->url);
+        $url = $reference->url;
         if ($url) {
             rs_print("URL: ".$url);
             header('Location: ' . $url);
