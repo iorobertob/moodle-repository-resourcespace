@@ -124,8 +124,17 @@ class repository_resourcespace extends repository {
         // Determine whether we are downloading the file, or should use a file reference.
         $usefilereference = optional_param('usefilereference', false, PARAM_BOOL);
         if ($usefilereference) {
-            if ($data = $this->dropbox->get_file_share_info($source)) {
-                $reference = (object) array_merge((array) $data, (array) $reference);
+            $fileInfo = explode(',', $source);
+            $resourceUrl = $this->make_api_request('get_resource_path', array(
+                'param1' => $fileInfo[0], // $resource
+                'param2' => '0',          // $getfilepath
+                'param3' => '',           // $size
+                'param5' => $fileInfo[1], // $extension
+            
+            ));
+            if ($resourceUrl) {
+                // $reference = (object) array_merge((array) $data, (array) $reference);
+                $reference->url = $resourceUrl;
             }
         }
 
@@ -138,9 +147,39 @@ class repository_resourcespace extends repository {
      * @inheritDocs
      */
     public function get_link($reference) {
-        $unpacked = $this->unpack_reference($reference);
+        // $unpacked = $this->unpack_reference($reference);
+        $unpacked = unserialize($reference);
 
         return $this->get_file_download_link($unpacked->url);
+    }
+
+    /**
+     * Return the source information.
+     *
+     * The result of the function is stored in files.source field. It may be analysed
+     * when the source file is lost or repository may use it to display human-readable
+     * location of reference original.
+     *
+     * This method is called when file is picked for the first time only. When file
+     * (either copy or a reference) is already in moodle and it is being picked
+     * again to another file area (also as a copy or as a reference), the value of
+     * files.source is copied.
+     *
+     * @inheritDocs
+     */
+    public function get_file_source_info($source) {
+        global $USER;
+        return 'ResourceSpace ('.fullname($USER).'): ' . $source;
+    }
+
+    public function get_reference_file_lifetime($ref) {
+        
+        return 60 * 60 * 24; // One day
+    }   
+
+    public function sync_individual_file(stored_file $storedfile) {
+        
+        return true;
     }
 
     public function supported_filetypes() {
