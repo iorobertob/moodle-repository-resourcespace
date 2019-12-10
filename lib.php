@@ -54,7 +54,24 @@ class repository_resourcespace extends repository {
             $listArray['help'] = "$this->enable_help_url";
         }
 
-        return $listArray;
+
+
+
+
+
+        $list = array(
+ //this will be used to build navigation bar
+'path'=>array(array('name'=>'root','path'=>'/'), array('name'=>'subfolder', 'path'=>'/subfolder')),
+'manage'=>'http://webmgr.moodle.com',
+'list'=> array(
+    array('title'=>'filename1', 'date'=>'1340002147', 'size'=>'10451213', 'source'=>'http://www.moodle.com/dl.rar'),
+    array('title'=>'folder', 'date'=>'1340002147', 'size'=>'0', 'children'=>array())
+)
+);
+
+        return $list;
+
+        // return $listArray;
     }
 
 /*
