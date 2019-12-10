@@ -63,10 +63,10 @@ class repository_resourcespace extends repository {
     }
 
 
-    public function print_search() {
-        $search = '<input class="form-control" id="reposearch" name="s" placeholder="Search" type="search">';
-        return $search;
-    }
+    // public function print_search() {
+    //     $search = '<input class="form-control" id="reposearch" name="s" placeholder="Search" type="search">';
+    //     return $search;
+    // }
 
     public function search($searchText, $page = 0) {
         $listArray = array(
