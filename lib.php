@@ -58,27 +58,16 @@ class repository_resourcespace extends repository {
         }
 
 
-//         $list = array(
-//  //this will be used to build navigation bar
-// 'path'=>array(array('name'=>'root','path'=>'/'), array('name'=>'subfolder', 'path'=>'/subfolder')),
-// 'manage'=>'http://webmgr.moodle.com',
-// 'list'=> array(
-//     array('title'=>'filename1', 'date'=>'1340002147', 'size'=>'10451213', 'source'=>'http://www.moodle.com/dl.rar'),
-//     array('title'=>'folder', 'date'=>'1340002147', 'size'=>'0', 'children'=>array())
-// )
-// );
-
-//         return $list;
 
         return $listArray;
     }
 
-/*
+
     public function print_search() {
         $search = '<input class="form-control" id="reposearch" name="s" placeholder="Search" type="search">';
         return $search;
     }
-*/
+
     public function search($searchText, $page = 0) {
         $listArray = array(
             'list' => array(),
@@ -154,13 +143,13 @@ class repository_resourcespace extends repository {
         return $this->get_file_download_link($unpacked->url);
     }
 
-    
-
     public function supported_filetypes() {
+        
         return '*';
     }
 
     public function global_search() {
+        
         return false;
     }
 
@@ -172,6 +161,7 @@ class repository_resourcespace extends repository {
     }
 
     public static function get_type_option_names() {
+        
         return array_merge(parent::get_type_option_names(), array('resourcespace_api_url', 'api_user', 'api_key', 'enable_help', 'enable_help_url'));
     }
 
