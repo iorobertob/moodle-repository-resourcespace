@@ -92,6 +92,8 @@ class repository_resourcespace extends repository {
     public function get_file($url, $filename = '') {
         // We have to catch the url, and make an additional request to the resourcespace api,
         // to get the actual filesource.
+        rs_print("URL AND FILENAME: ". $url . " + ". $filename);
+
         $fileInfo = explode(',', $url);
 
         $resourceUrl = $this->make_api_request('get_resource_path', array(
@@ -162,6 +164,7 @@ class repository_resourcespace extends repository {
      * @return string
      */
     protected function get_file_download_link($sharedurl) {
+        rs_print("SHAREDURL: ". $sharedurl);
         $url = new \moodle_url($sharedurl);
         $url->param('dl', 1);
 
