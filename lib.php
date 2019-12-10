@@ -163,6 +163,7 @@ class repository_resourcespace extends repository {
             rs_print("URL: ".$url);
             header('Location: ' . $url);
         } else {
+            rs_print("NO URL: ". $reference->url);
             send_file_not_found();
         }
     }
