@@ -242,8 +242,8 @@ class repository_resourcespace extends repository {
         // return FILE_INTERNAL;
         // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
         // return FILE_INTERNAL |  FILE_EXTERNAL;
-        return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
-        // return FILE_REFERENCE;
+        // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
+        return FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
