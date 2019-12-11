@@ -40,11 +40,10 @@ class repository_resourcespace extends repository {
         if ($path !== '') {
             // Redirect to search, asking for filesa within the given collection
             $listArray = $this->search(sprintf('!collection%s', $path), $page);
-            rs_print("PAGE: " . $page, false);
-            rs_print("LISTING PATH ".$path.": " .serialize($listArray), false);
+
             return $listArray;
         }
-        rs_print("LISTING: " .$page);
+
         $listArray = array(
             'list' => $this->do_search_collections(),
             'norefresh' => true,
@@ -52,7 +51,7 @@ class repository_resourcespace extends repository {
             'dynload' => true,
             'issearchresult' => false,
         );
-        rs_print("LISTING: " .serialize($listArray));
+
         if ($this->enable_help == 1) {
             $listArray['help'] = "$this->enable_help_url";
         }
@@ -92,8 +91,6 @@ class repository_resourcespace extends repository {
     public function get_file($url, $filename = '') {
         // We have to catch the url, and make an additional request to the resourcespace api,
         // to get the actual filesource.
-        rs_print("URL AND FILENAME: ". $url . " + ". $filename);
-
 
         // $fileInfo = explode(',', $url);
         $fileInfo = explode(',', unserialize($url)->path);
@@ -143,7 +140,6 @@ class repository_resourcespace extends repository {
             }
         }
         $serial_reference = serialize($reference);
-        rs_print("SERIAL REFERENCE: " .$serial_reference );
         return $serial_reference;
     }
 
@@ -175,17 +171,17 @@ class repository_resourcespace extends repository {
     }
 
     public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
-        rs_print("SEND FILE");
+
     // Example taken from repository_equella
         // $reference  = unserialize(base64_decode($stored_file->get_reference()));
         $reference = unserialize($stored_file->get_reference());
         // $url = $this->appendtoken($reference->url);
         $url = $reference->url;
         if ($url) {
-            rs_print("URL: ".$url);
+
             header('Location: ' . $url);
         } else {
-            rs_print("NO URL: ". $reference->url);
+
             send_file_not_found();
         }
     }
@@ -246,7 +242,8 @@ class repository_resourcespace extends repository {
         // return FILE_INTERNAL;
         // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
         // return FILE_INTERNAL |  FILE_EXTERNAL;
-        return FILE_REFERENCE;
+        return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
+        // return FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
