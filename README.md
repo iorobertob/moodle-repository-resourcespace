@@ -1,3 +1,8 @@
+## Important
+For thsi plugin to work the folder in moodle/repository/, should be named 'resourcespaace'
+
+This respository is a copy from griffer's repo: https://github.com/griffer/moodle-repository_resourcespace. I has been modified and adapted to work with a custom set of plugins for Intermusic project. 
+
 # Moodle filepicker plugin for ResourceSpace
 This plugin allows you to acces a ResourceSpace DAM via the Moodle filepicker.
 

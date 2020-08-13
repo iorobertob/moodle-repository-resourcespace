@@ -62,11 +62,6 @@ class repository_resourcespace extends repository {
     }
 
 
-    // public function print_search() {
-    //     $search = '<input class="form-control" id="reposearch" name="s" placeholder="Search" type="search">';
-    //     return $search;
-    // }
-
     public function search($searchText, $page = 0) {
         $listArray = array(
             'list' => array(),
@@ -92,7 +87,6 @@ class repository_resourcespace extends repository {
         // We have to catch the url, and make an additional request to the resourcespace api,
         // to get the actual filesource.
 
-        // $fileInfo = explode(',', $url);
         $fileInfo = explode(',', unserialize($url)->path);
 
         $resourceUrl = $this->make_api_request('get_resource_path', array(
@@ -134,7 +128,6 @@ class repository_resourcespace extends repository {
             
             ));
             if ($resourceUrl) {
-                // $reference = (object) array_merge((array) $data, (array) $reference);
                 $reference->url = $resourceUrl;
                 $reference->filename= $source;
             }
@@ -173,9 +166,7 @@ class repository_resourcespace extends repository {
     public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
 
     // Example taken from repository_equella
-        // $reference  = unserialize(base64_decode($stored_file->get_reference()));
         $reference = unserialize($stored_file->get_reference());
-        // $url = $this->appendtoken($reference->url);
         $url = $reference->url;
         if ($url) {
 
@@ -216,12 +207,9 @@ class repository_resourcespace extends repository {
     }
 
     public function get_reference_details($reference, $filestatus = 0) {
-    // Example taken from repository_equella
+        // Example taken from repository_equella
         if (!$filestatus) {
-            // $ref = unserialize(base64_decode($reference));
             $ref = unserialize($reference);
-            //TODO: CHANGE THIS !!!!!!!!!!
-            // $ref->filename = 'dummy';
             return $this->get_name(). ': '. $ref->filename;
         } else {
             return get_string('lostsource', 'repository', '');
@@ -243,7 +231,6 @@ class repository_resourcespace extends repository {
         // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
         // return FILE_INTERNAL |  FILE_EXTERNAL;
         return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
-        // return FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
