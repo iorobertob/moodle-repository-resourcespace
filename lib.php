@@ -159,19 +159,19 @@ class repository_resourcespace extends repository {
     // }
 
 
-    // public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
+    public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
 
-    //     // Example taken from repository_equella
-    //     $reference = unserialize($stored_file->get_reference());
-    //     $url = $reference->url;
-    //     if ($url) {
+        // Example taken from repository_equella
+        $reference = unserialize($stored_file->get_reference());
+        $url = $reference->url;
+        if ($url) {
 
-    //         header('Location: ' . $url);
-    //     } else {
+            header('Location: ' . $url);
+        } else {
 
-    //         send_file_not_found();
-    //     }
-    // }
+            send_file_not_found();
+        }
+    }
 
    /*
      * Return the source information.
