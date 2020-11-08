@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once("$CFG->dirroot/repository/resourcespace/io_print.php"); 
-
 class repository_resourcespace extends repository {
 
     public function __construct($repositoryid, $context, array $options, $readonly) {
@@ -56,8 +54,6 @@ class repository_resourcespace extends repository {
             $listArray['help'] = "$this->enable_help_url";
         }
 
-
-
         return $listArray;
     }
 
@@ -76,7 +72,7 @@ class repository_resourcespace extends repository {
         }
 
         $collections = $this->do_search_collections($searchText);
-        $resources = $this->do_search_resources($searchText);
+        $resources   = $this->do_search_resources($searchText);
 
         $listArray['list'] = array_merge($collections, $resources);
 
@@ -86,7 +82,6 @@ class repository_resourcespace extends repository {
     public function get_file($url, $filename = '') {
         // We have to catch the url, and make an additional request to the resourcespace api,
         // to get the actual filesource.
-
         $fileInfo = explode(',', unserialize($url)->path);
 
         $resourceUrl = $this->make_api_request('get_resource_path', array(
@@ -109,7 +104,6 @@ class repository_resourcespace extends repository {
      * @inheritDocs
      */
     public function get_file_reference($source) {
-        rs_print("SOURCE: " .$source);
         global $USER;
         $reference = new stdClass;
         $reference->userid = $USER->id;
@@ -148,6 +142,8 @@ class repository_resourcespace extends repository {
         return $this->get_file_download_link($unpacked->url);
     }
 
+    /////////////////////////////////////////////////////////////
+
     /**
      * Converts a URL received from dropbox API function 'shares' into URL that
      * can be used to download/access file directly
@@ -156,16 +152,16 @@ class repository_resourcespace extends repository {
      * @return string
      */
     protected function get_file_download_link($sharedurl) {
-        rs_print("SHAREDURL: ". $sharedurl);
         $url = new \moodle_url($sharedurl);
         $url->param('dl', 1);
 
         return $url->out(false);
     }
 
+
     public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
 
-    // Example taken from repository_equella
+        // Example taken from repository_equella
         $reference = unserialize($stored_file->get_reference());
         $url = $reference->url;
         if ($url) {
@@ -177,7 +173,7 @@ class repository_resourcespace extends repository {
         }
     }
 
-    /**
+   /*
      * Return the source information.
      *
      * The result of the function is stored in files.source field. It may be analysed
@@ -216,6 +212,9 @@ class repository_resourcespace extends repository {
         }
     }
 
+    //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+
     public function supported_filetypes() {
         
         return '*';
@@ -229,7 +228,7 @@ class repository_resourcespace extends repository {
     public function supported_returntypes() {
         // return FILE_INTERNAL;
         // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
-        // return FILE_INTERNAL |  FILE_EXTERNAL;
+        // return FILE_INTERNAL | FILE_EXTERNAL;
         return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
     }
 
