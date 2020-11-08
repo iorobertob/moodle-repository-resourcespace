@@ -151,27 +151,27 @@ class repository_resourcespace extends repository {
      * @param string $sharedurl
      * @return string
      */
-    protected function get_file_download_link($sharedurl) {
-        $url = new \moodle_url($sharedurl);
-        $url->param('dl', 1);
+    // protected function get_file_download_link($sharedurl) {
+    //     $url = new \moodle_url($sharedurl);
+    //     $url->param('dl', 1);
 
-        return $url->out(false);
-    }
+    //     return $url->out(false);
+    // }
 
 
-    public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
+    // public function send_file($stored_file, $lifetime=86400 , $filter=0, $forcedownload=false, array $options = null) {
 
-        // Example taken from repository_equella
-        $reference = unserialize($stored_file->get_reference());
-        $url = $reference->url;
-        if ($url) {
+    //     // Example taken from repository_equella
+    //     $reference = unserialize($stored_file->get_reference());
+    //     $url = $reference->url;
+    //     if ($url) {
 
-            header('Location: ' . $url);
-        } else {
+    //         header('Location: ' . $url);
+    //     } else {
 
-            send_file_not_found();
-        }
-    }
+    //         send_file_not_found();
+    //     }
+    // }
 
    /*
      * Return the source information.
@@ -187,30 +187,30 @@ class repository_resourcespace extends repository {
      *
      * @inheritDocs
      */
-    public function get_file_source_info($source) {
-        global $USER;
-        return 'ResourceSpace ('.fullname($USER).'): ' . $source;
-    }
+    // public function get_file_source_info($source) {
+    //     global $USER;
+    //     return 'ResourceSpace ('.fullname($USER).'): ' . $source;
+    // }
 
-    public function get_reference_file_lifetime($ref) {
+    // public function get_reference_file_lifetime($ref) {
         
-        return 60 * 60 * 24; // One day
-    }   
+    //     return 60 * 60 * 24; // One day
+    // }   
 
-    public function sync_individual_file(stored_file $storedfile) {
+    // public function sync_individual_file(stored_file $storedfile) {
         
-        return true;
-    }
+    //     return true;
+    // }
 
-    public function get_reference_details($reference, $filestatus = 0) {
-        // Example taken from repository_equella
-        if (!$filestatus) {
-            $ref = unserialize($reference);
-            return $this->get_name(). ': '. $ref->filename;
-        } else {
-            return get_string('lostsource', 'repository', '');
-        }
-    }
+    // public function get_reference_details($reference, $filestatus = 0) {
+    //     // Example taken from repository_equella
+    //     if (!$filestatus) {
+    //         $ref = unserialize($reference);
+    //         return $this->get_name(). ': '. $ref->filename;
+    //     } else {
+    //         return get_string('lostsource', 'repository', '');
+    //     }
+    // }
 
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
