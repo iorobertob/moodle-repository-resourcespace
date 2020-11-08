@@ -227,9 +227,9 @@ class repository_resourcespace extends repository {
 
     public function supported_returntypes() {
         // return FILE_INTERNAL;
-        // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
+        return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE | FILE_CONTROLLED_LINK;
         // return FILE_INTERNAL | FILE_EXTERNAL;
-        return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
+        // return FILE_INTERNAL | FILE_EXTERNAL | FILE_REFERENCE;
     }
 
     public static function get_type_option_names() {
